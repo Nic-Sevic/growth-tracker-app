@@ -14,11 +14,9 @@ const RadarChart: React.FC<RadarChartProps> = ({ data }) => {
 
     const options: ChartOptions<'radar'> = {
         scales: {
-            r: {
-                beginAtZero: true,
-                ticks: {
-                    beginAtZero: true,
-                },
+            r: { // had to massage correction a bit to get it to work
+                suggestedMin: 0,
+                suggestedMax: 100,
             },
         },
     };
