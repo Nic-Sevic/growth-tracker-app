@@ -33,7 +33,7 @@ To start the development server, run:
 ```
 npm start
 ```
-The application will be available at `http://localhost:3000`.
+The application will be available at `http://localhost:3002`. //for me at least
 
 ### Building for Production
 To create a production build, run:

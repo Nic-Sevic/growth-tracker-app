@@ -1,24 +1,24 @@
 import React from 'react';
 import { Radar } from 'react-chartjs-2';
+import { ChartOptions } from 'chart.js';
 
-const RadarChart = ({ data }) => {
+interface RadarChartProps {
+    data: any;
+}
+
+const RadarChart: React.FC<RadarChartProps> = ({ data }) => {
     const chartData = {
         labels: data.labels,
-        datasets: [
-            {
-                label: 'Skills and Goals',
-                data: data.values,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1,
-            },
-        ],
+        datasets: data.datasets,
     };
 
-    const options = {
-        scale: {
-            ticks: {
+    const options: ChartOptions<'radar'> = {
+        scales: {
+            r: {
                 beginAtZero: true,
+                ticks: {
+                    beginAtZero: true,
+                },
             },
         },
     };

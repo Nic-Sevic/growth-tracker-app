@@ -8,7 +8,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h1>Personal and Professional Growth Tracker</h1>
-      <RadarChart />
+      <RadarChart data={radarData} />
       <GoalTracker />
       <ChatbotGuide />
     </div>
