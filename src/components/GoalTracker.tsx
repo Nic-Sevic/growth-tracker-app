@@ -1,44 +1,68 @@
 import React, { useState } from 'react';
 
-const GoalTracker: React.FC = () => {
-    const [goal, setGoal] = useState('');
-    const [goals, setGoals] = useState<string[]>([]);
+interface GoalTrackerProps {
+  goals: { name: string; startingValue: number; desiredValue: number }[];
+  onAddGoal: (goal: { name: string; startingValue: number; desiredValue: number }) => void;
+  onRemoveGoal: (index: number) => void;
+}
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setGoal(event.target.value);
-    };
+const GoalTracker: React.FC<GoalTrackerProps> = ({ goals, onAddGoal, onRemoveGoal }) => {
+  const [goalName, setGoalName] = useState('');
+  const [startingValue, setStartingValue] = useState<number | ''>('');
+  const [desiredValue, setDesiredValue] = useState<number | ''>('');
 
-    const handleAddGoal = () => {
-        if (goal) {
-            setGoals([...goals, goal]);
-            setGoal('');
-        }
-    };
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGoalName(event.target.value);
+  };
 
-    const handleRemoveGoal = (index: number) => {
-        const newGoals = goals.filter((_, i) => i !== index);
-        setGoals(newGoals);
-    };
+  const handleStartingValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setStartingValue(event.target.value === '' ? '' : Number(event.target.value));
+  };
 
-    return (
-        <div className="goal-tracker">
-            <h2>Goal Tracker</h2>
-            <input 
-                type="text" 
-                value={goal} 
-                onChange={handleInputChange} 
-                placeholder="Enter your goal" 
-            />
-            <button onClick={handleAddGoal}>Add Goal</button>
-            <ul>
-                {goals.map((g, index) => (
-                    <li key={index}>
-                        {g} <button onClick={() => handleRemoveGoal(index)}>Remove</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  const handleDesiredValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDesiredValue(event.target.value === '' ? '' : Number(event.target.value));
+  };
+
+  const handleAddGoal = () => {
+    if (goalName && startingValue !== '' && desiredValue !== '') {
+      onAddGoal({ name: goalName, startingValue: startingValue, desiredValue: desiredValue });
+      setGoalName('');
+      setStartingValue('');
+      setDesiredValue('');
+    }
+  };
+
+  return (
+    <div className="goal-tracker">
+      <h2>Goal Tracker</h2>
+      <input 
+        type="text" 
+        value={goalName} 
+        onChange={handleNameChange} 
+        placeholder="Enter your goal name" 
+      />
+      <input 
+        type="number" 
+        value={startingValue} 
+        onChange={handleStartingValueChange} 
+        placeholder="Enter your starting value" 
+      />
+      <input 
+        type="number" 
+        value={desiredValue} 
+        onChange={handleDesiredValueChange} 
+        placeholder="Enter your desired value" 
+      />
+      <button onClick={handleAddGoal}>Add Goal</button>
+      <ul>
+        {goals.map((g, index) => (
+          <li key={index}>
+            {g.name} (Starting: {g.startingValue}, Desired: {g.desiredValue}) <button onClick={() => onRemoveGoal(index)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default GoalTracker;
