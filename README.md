@@ -33,7 +33,7 @@ To start the development server, run:
 ```
 npm start
 ```
-The application will be available at `http://localhost:3002`. //for me at least
+The application will be available at `http://localhost:3002`. 
 
 ### Building for Production
 To create a production build, run:
@@ -43,7 +43,7 @@ npm run build
 This will generate a `build` folder with the optimized application.
 
 ## Contributing
-Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
+No thanks; I'm just playing with copilot here
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the GPL License.
