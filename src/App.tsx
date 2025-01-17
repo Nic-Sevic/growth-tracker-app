@@ -5,7 +5,11 @@ import GoalTracker from './components/GoalTracker';
 import RadarChart from './components/RadarChart';
 
 const App: React.FC = () => {
-  const [goals, setGoals] = useState<{ name: string; startingValue: number; desiredValue: number }[]>([]);
+  const [goals, setGoals] = useState<{ name: string; startingValue: number; desiredValue: number }[]>([
+    { name: 'Skill 1', startingValue: 65, desiredValue: 80 },
+    { name: 'Skill 2', startingValue: 59, desiredValue: 70 },
+    { name: 'Skill 3', startingValue: 90, desiredValue: 95 },
+  ]);
   const [radarData, setRadarData] = useState({
     labels: ['Skill 1', 'Skill 2', 'Skill 3'],
     datasets: [
@@ -63,8 +67,8 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h1>Personal and Professional Growth Tracker</h1>
-      <RadarChart data={radarData} />
-      <GoalTracker goals={goals} onAddGoal={handleAddGoal} onRemoveGoal={handleRemoveGoal} />
+      <RadarChart goals={goals} />
+      <GoalTracker goals={goals} setGoals={setGoals} onAddGoal={handleAddGoal} onRemoveGoal={handleRemoveGoal} />
       <ChatbotGuide />
     </div>
   );

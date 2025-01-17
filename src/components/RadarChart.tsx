@@ -1,32 +1,32 @@
 import React from 'react';
-import { Radar } from 'react-chartjs-2';
-import { ChartOptions } from 'chart.js';
 
-interface RadarChartProps {
-    data: any;
-}
+type Goal = {
+  name: string;
+  startingValue: number;
+  desiredValue: number;
+};
 
-const RadarChart: React.FC<RadarChartProps> = ({ data }) => {
-    const chartData = {
-        labels: data.labels,
-        datasets: data.datasets,
-    };
+type RadarChartProps = {
+  goals: Goal[];
+};
 
-    const options: ChartOptions<'radar'> = {
-        scales: {
-            r: { // had to massage correction a bit to get it to work
-                suggestedMin: 0,
-                suggestedMax: 100,
-            },
-        },
-    };
+const RadarChart: React.FC<RadarChartProps> = ({ goals }) => {
+  // Use the goals prop to render the radar chart
+  if (goals.length === 0) {
+    return <div>No goals to display</div>;
+  }
 
-    return (
-        <div>
-            <h2>Skills and Goals Radar Chart</h2>
-            <Radar data={chartData} options={options} />
-        </div>
-    );
+  return (
+    <div>
+      {/* Radar chart implementation */}
+      {/* Example: Render goal names */}
+      <ul>
+        {goals.map((goal, index) => (
+          <li key={index}>{goal.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default RadarChart;
